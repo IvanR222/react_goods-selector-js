@@ -26,27 +26,25 @@ export const App = () => {
       <h1 className="title is-flex is-align-items-center">
         {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-      {selectedGood && (
-        <button
-          data-cy="ClearButton"
-          aria-label="Clear"
-          type="button"
-          className="button is-light ml-3"
-          onClick={clear}
-        >
-
-        </button>
-      )}
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            aria-label="Clear selection"
+            className="delete is-medium ml-3"
+            onClick={clear}
+          />
+        )}
       </h1>
 
       <table className="table">
         <tbody>
-          {goods.map(n => {
-            const isSelected = n === selectedGood;
+          {goods.map(good => {
+            const isSelected = good === selectedGood;
 
             return (
               <tr
-                key={n}
+                key={good}
                 data-cy="Good"
                 className={
                   isSelected ? 'has-background-success-light' : undefined
@@ -58,7 +56,7 @@ export const App = () => {
                       data-cy="AddButton"
                       type="button"
                       className="button is-primary is-light"
-                      onClick={() => select(n)}
+                      onClick={() => select(good)}
                     >
                       +
                     </button>
@@ -75,13 +73,13 @@ export const App = () => {
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {n}
+                  {good}
                 </td>
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
     </main>
   );
-}
+};
